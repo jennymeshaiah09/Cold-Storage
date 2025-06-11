@@ -10,8 +10,8 @@ const Contact = () => {
   });
   const [status, setStatus] = useState({
     loading: false,
-    success: false,
-    error: ''
+    message: '',
+    type: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -23,10 +23,10 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus({ loading: true, success: false, error: '' });
+    setStatus({ loading: true, message: '', type: '' });
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch('http://localhost:3000/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,19 +34,21 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
+        throw new Error('Failed to send message');
       }
 
-      setStatus({ loading: false, success: true, error: '' });
+      setStatus({
+        loading: false,
+        message: 'Message sent successfully! We will get back to you soon.',
+        type: 'success'
+      });
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
       setStatus({
         loading: false,
-        success: false,
-        error: error instanceof Error ? error.message : 'Failed to send message'
+        message: 'Failed to send message. Please try again.',
+        type: 'error'
       });
     }
   };
@@ -65,15 +67,15 @@ const Contact = () => {
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h3 className="text-2xl font-semibold text-gray-900 mb-6">Send us a message</h3>
             
-            {status.success && (
+            {status.type === 'success' && (
               <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-lg">
-                Thank you for your message! We'll get back to you soon.
+                {status.message}
               </div>
             )}
 
-            {status.error && (
+            {status.type === 'error' && (
               <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg">
-                {status.error}
+                {status.message}
               </div>
             )}
 
