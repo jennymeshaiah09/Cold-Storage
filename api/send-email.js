@@ -2,6 +2,16 @@ import nodemailer from 'nodemailer';
 import cors from 'cors';
 
 const handler = async (req, res) => {
+  // Run the cors middleware
+  await new Promise((resolve, reject) => {
+    cors()(req, res, (err) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve();
+    });
+  });
+
   // Vercel environment variables are directly available via process.env
   const { name, email, phone, message } = req.body;
 
@@ -78,4 +88,4 @@ const handler = async (req, res) => {
   }
 };
 
-export default cors()(handler); 
+export default handler; 
