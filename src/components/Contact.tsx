@@ -26,7 +26,7 @@ const Contact = () => {
     setStatus({ loading: true, message: '', type: '' });
 
     try {
-      const response = await fetch('/api/send-email', {
+      const response = await fetch('/api/send-email.cjs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
