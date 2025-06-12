@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer');
-const cors = require('cors'); // Although Vercel might handle CORS, it's good practice to have.
+import nodemailer from 'nodemailer';
+import cors from 'cors';
 
 const handler = async (req, res) => {
   // Vercel environment variables are directly available via process.env
@@ -78,4 +78,4 @@ const handler = async (req, res) => {
   }
 };
 
-module.exports = cors()(handler); 
+export default cors()(handler); 
