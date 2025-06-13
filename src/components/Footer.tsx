@@ -22,9 +22,8 @@ const Footer = () => {
               />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Cold Frost is your trusted partner for comprehensive cold storage solutions across India. 
-              With over 15 years of experience, we deliver reliable, energy-efficient 
-              refrigeration systems that meet the highest industry standards.
+                            Leading provider of advanced cold storage facilities and refrigeration systems - 
+                            we deliver precision temperature control solutions.
             </p>
             <div className="flex space-x-4">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
@@ -102,7 +101,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm animate-fade-in-up">
-              © 2024 Cold Frost India. All rights reserved.
+              © 2025 Cold Frost India. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               {['Privacy Policy', 'Terms of Service' ].map((link, index) => (

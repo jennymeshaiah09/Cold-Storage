@@ -112,7 +112,7 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                  Phone (optional)
+                  Phone 
                 </label>
                 <input
                   type="tel"
@@ -120,6 +120,7 @@ const Contact = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
                 />
               </div>
@@ -167,7 +168,7 @@ const Contact = () => {
                   <Mail className="w-6 h-6 text-teal-600 mt-1" />
                   <div className="ml-4">
                     <h4 className="text-lg font-medium text-gray-900">Email</h4>
-                    <p className="text-gray-600">info@coldstorage.com</p>
+                    <p className="text-gray-600">coldfrosthyd@gmail.com</p>
                   </div>
                 </div>
 
@@ -175,7 +176,7 @@ const Contact = () => {
                   <Phone className="w-6 h-6 text-teal-600 mt-1" />
                   <div className="ml-4">
                     <h4 className="text-lg font-medium text-gray-900">Phone</h4>
-                    <p className="text-gray-600">+91 123 456 7890</p>
+                    <p className="text-gray-600">+91 9133431786</p>
                   </div>
                 </div>
 
