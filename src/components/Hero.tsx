@@ -27,14 +27,14 @@ const Hero = () => {
               </span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-              Leading provider of advanced cold storage facilities and refrigeration systems - we deliver precision temperature control solutions.
+              Welcome to Cold Frost, your premier destination for all your cold room needs. Our team of experts.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
               <a 
                 href="#contact" 
                 className="group bg-teal-600 text-white px-8 py-4 rounded-lg hover:bg-teal-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center space-x-2"
               >
-                <span>Get Free Consultation</span>
+                <span>Get Quote</span>
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
               </a>
               
@@ -67,9 +67,9 @@ const Hero = () => {
           <div className={`relative transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
             <div className="bg-gradient-to-br from-teal-500/20 to-teal-600/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 group">
               <img 
-                src="/coldfrost.jpg" 
+                src="cold.webp" 
                 alt="Cold Storage Facility in India" 
-                className="rounded-xl shadow-2xl w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+                className="rounded-xl shadow-2xl w-full h-140 object-cover group-hover:scale-105 transition-transform duration-500"
               />
               {/* Floating stats */}
               
