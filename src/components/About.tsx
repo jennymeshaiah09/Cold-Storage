@@ -59,9 +59,7 @@ const About = () => {
               Premium Refrigeration Equipment & Technology Partners
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Cold Frost partners with world-leading refrigeration manufacturers to deliver cutting-edge 
-              cold storage solutions. We use only premium equipment from globally recognized brands 
-              to ensure maximum reliability, energy efficiency, and performance for our Indian clients.
+             At Cold Frost , we specialize in the sales, installation, and servicing of cold rooms tailored to meet the refrigeration needs of businesses across industries. From commercial kitchens and food storage facilities to pharmaceutical and industrial applications, we provide reliable and energy-efficient cold room solutions designed for long-term performance.
             </p>
             
             <div className="space-y-4 mb-8">
@@ -85,7 +83,7 @@ const About = () => {
                 href="#contact" 
                 className="group-hover:translate-x-1 transition-transform duration-300 inline-block"
               >
-                Get Free Consultation
+                Get Quote
               </a>
             </button>
           </div>
