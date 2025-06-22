@@ -185,8 +185,9 @@ const Contact = () => {
                   <div className="ml-4">
                     <h4 className="text-lg font-medium text-gray-900">Address</h4>
                     <p className="text-gray-600">
-                      123 Industrial Area<br />
-                      New Delhi, India 110001
+                      Building No: 1-8-505/D/20<br />
+                      near SS Cargo, Prakash Nagar<br />
+                      Begumpet, 500016<br />
                     </p>
                   </div>
                 </div>

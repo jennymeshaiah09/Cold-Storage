@@ -98,8 +98,9 @@ const Footer = () => {
               <div className="flex items-start space-x-3 group hover:translate-x-1 transition-transform duration-300">
                 <MapPin size={18} className="text-teal-400 mt-1 group-hover:scale-110 transition-transform duration-300" />
                 <div>
-                  <p className="text-gray-300">123 Industrial Area, Sector 15</p>
-                  <p className="text-gray-300">Hyderbad, Telanagana 122001</p>
+                  <p className="text-gray-300">Building No: 1-8-505/D/20</p>
+                  <p className="text-gray-300">near SS Cargo, Prakash Nagar</p>
+                  <p className="text-gray-300">Begumpet, 500016</p>
                 </div>
               </div>
             </div>
