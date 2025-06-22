@@ -2,6 +2,12 @@ import React from 'react';
 import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const Footer = () => {
+  const socialLinks = [
+    "https://facebook.com/yourpage",
+    "https://www.linkedin.com/in/cold-frost-402046371/",
+    "https://www.instagram.com/cold_frosthyd/"
+  ];
+
   return (
     <footer className="bg-slate-900 text-white relative overflow-hidden">
       {/* Animated background elements */}
@@ -26,10 +32,12 @@ const Footer = () => {
                             we deliver precision temperature control solutions.
             </p>
             <div className="flex space-x-4">
-              {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
+              {[Facebook,  Linkedin, Instagram].map((Icon, index) => (
                 <a 
                   key={index}
-                  href="#" 
+                  href={socialLinks[index]}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-teal-600 p-2 rounded-lg hover:bg-teal-700 transition-all duration-300 transform hover:scale-110 hover:-rotate-12 animate-fade-in-up"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
