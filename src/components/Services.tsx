@@ -251,8 +251,7 @@ const Services = () => {
           <div className="text-center">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Services</h3>
             <p className="text-gray-600 mb-4">Cold Frost customizes products according to client requirements and provides the following services:</p>
-            <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center mb-10 overflow-hidden">
-              {/* Sliding Cards: Only render prev and current */}
+            <div className="relative w-full h-[400px] md:h-[500px] min-h-[300px] flex items-center justify-center mb-10 overflow-hidden border-2 border-red-500 md:border-none">
               {[prev, current].map((idx, i) => (
                 <div
                   key={idx + '-' + i + '-' + (i === 0 ? 'prev' : 'current')}
@@ -273,9 +272,10 @@ const Services = () => {
                   <img
                     src={services[idx].image}
                     alt={services[idx].title}
-                    className="w-full h-full object-cover object-center absolute inset-0"
+                    className="w-full h-full object-cover object-center absolute inset-0 border-2 border-blue-500 md:border-none"
                     draggable={false}
                     style={{ filter: 'none' }}
+                    onError={e => { e.currentTarget.src = '/imagee.jpg'; }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" />
                   <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center px-6">
