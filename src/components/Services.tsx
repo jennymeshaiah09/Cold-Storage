@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Apple, Fish, Milk, Wheat, Beef, Grape } from 'lucide-react';
+import { Apple, Fish, Milk, Wheat, Beef, Grape, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const foodTypes = [
   {
@@ -60,10 +60,53 @@ const foodTypes = [
   }
 ];
 
+const services = [
+  {
+    title: 'Estimation',
+    description: 'Accurate cost and time estimates for your projects.',
+    image: '/estimation.jpg', // Calculator/Plans
+  },
+  {
+    title: 'Designing',
+    description: 'Custom designs tailored to your specific needs.',
+    image: '/design.jpg', // Blueprint/Design
+  },
+  {
+    title: 'Supply',
+    description: 'High-quality products delivered on time.',
+    image: '/supply.jpg', // Warehouse/Truck
+  },
+  {
+    title: 'Installation',
+    description: 'Professional installation services for seamless setup.',
+    image: '/installation.jpg', // Workers/Install
+  },
+  {
+    title: 'Commissioning',
+    description: 'Thorough testing and commissioning to ensure optimal performance.',
+    image: '/commison.jpg', // Inspection/Quality
+  },
+  {
+    title: 'After Sales Services',
+    description: 'Ongoing support and maintenance (terms & conditions apply).',
+    image: '/sales.png', // Support/Maintenance
+  },
+  {
+    title: 'Best Product Performance',
+    description: 'Delivered by our most skilled team.',
+    image: '/performance.png', // Trophy/Badge
+  },
+];
+
 const Services = () => {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [current, setCurrent] = useState(0);
+  const [prev, setPrev] = useState(0);
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
+  const [isSliding, setIsSliding] = useState(false);
+  const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,6 +127,17 @@ const Services = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Auto-slide every 3 seconds, set up interval only once on mount
+  useEffect(() => {
+    intervalRef.current = window.setInterval(() => {
+      handleSlide('right');
+    }, 3000);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+    // eslint-disable-next-line
+  }, []);
+
   // Close modal on Escape key
   useEffect(() => {
     if (selected === null) return;
@@ -93,6 +147,30 @@ const Services = () => {
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, [selected]);
+
+  const handleSlide = (direction: 'left' | 'right') => {
+    if (isSliding) return;
+    setIsSliding(true);
+    setSlideDirection(direction);
+    setPrev(current);
+    setCurrent((prevIdx) => {
+      if (direction === 'right') {
+        return (prevIdx + 1) % services.length;
+      } else {
+        return (prevIdx - 1 + services.length) % services.length;
+      }
+    });
+    setTimeout(() => setIsSliding(false), 600); // match transition duration
+  };
+
+  const goTo = (idx: number) => {
+    if (isSliding || idx === current) return;
+    setSlideDirection(idx > current ? 'right' : 'left');
+    setPrev(current);
+    setCurrent(idx);
+    setIsSliding(true);
+    setTimeout(() => setIsSliding(false), 600);
+  };
 
   return (
     <section id="services" className="py-20 bg-gray-50 overflow-hidden" ref={sectionRef}>
@@ -168,6 +246,103 @@ const Services = () => {
             </div>
           </div>
         </div>
+
+        <div className="mt-16 bg-gradient-to-br from-teal-50 to-teal-50 rounded-2xl p-8 border border-teal-100 animate-fade-in-up" style={{ animationDelay: '1000ms' }}>
+          <div className="text-center">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Services</h3>
+            <p className="text-gray-600 mb-4">Cold Frost customizes products according to client requirements and provides the following services:</p>
+            <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center mb-10 overflow-hidden">
+              {/* Sliding Cards */}
+              <div className="absolute inset-0 w-full h-full">
+                {/* Previous Card */}
+                {isSliding && (
+                  <div
+                    className={`absolute w-full h-full top-0 left-0 transition-transform duration-600 ease-in-out
+                      ${slideDirection === 'right' ? '-translate-x-0 animate-slide-out-left' : 'translate-x-0 animate-slide-out-right'}`}
+                    style={{ zIndex: 10 }}
+                  >
+                    <img
+                      src={services[prev].image}
+                      alt={services[prev].title}
+                      className="w-full h-full object-cover object-center absolute inset-0"
+                      draggable={false}
+                      style={{ filter: 'none' }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" />
+                    <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center px-6">
+                      <h3 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                        {services[prev].title}
+                      </h3>
+                      <p className="text-lg md:text-2xl text-white/90 mb-6 max-w-2xl mx-auto">
+                        {services[prev].description}
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {/* Current Card */}
+                <div
+                  className={`absolute w-full h-full top-0 left-0 transition-transform duration-600 ease-in-out
+                    ${isSliding
+                      ? slideDirection === 'right'
+                        ? 'translate-x-full animate-slide-in-right'
+                        : '-translate-x-full animate-slide-in-left'
+                      : 'translate-x-0'}
+                  `}
+                  style={{ zIndex: 20 }}
+                >
+                  <img
+                    src={services[current].image}
+                    alt={services[current].title}
+                    className="w-full h-full object-cover object-center absolute inset-0"
+                    draggable={false}
+                    style={{ filter: 'none' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" />
+                  <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center px-6">
+                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                      {services[current].title}
+                    </h3>
+                    <p className="text-lg md:text-2xl text-white/90 mb-6 max-w-2xl mx-auto">
+                      {services[current].description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* Left Arrow */}
+              <button
+                onClick={() => handleSlide('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 bg-transparent text-teal-700 px-2 py-2 shadow-none transition-all duration-300 z-20"
+                aria-label="Previous Service"
+                disabled={isSliding}
+                style={{ borderRadius: 0, borderTopRightRadius: '0.75rem', borderBottomRightRadius: '0.75rem' }}
+              >
+                <ChevronLeft size={28} />
+              </button>
+              {/* Right Arrow */}
+              <button
+                onClick={() => handleSlide('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-transparent text-teal-700 px-2 py-2 shadow-none transition-all duration-300 z-20"
+                aria-label="Next Service"
+                disabled={isSliding}
+                style={{ borderRadius: 0, borderTopLeftRadius: '0.75rem', borderBottomLeftRadius: '0.75rem' }}
+              >
+                <ChevronRight size={28} />
+              </button>
+              {/* Dots */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+                {services.map((_, idx: number) => (
+                  <button
+                    key={idx}
+                    onClick={() => goTo(idx)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${idx === current ? 'bg-teal-400 scale-125' : 'bg-white/70 hover:bg-teal-200'}`}
+                    aria-label={`Go to service ${idx + 1}`}
+                    disabled={isSliding}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       {selected !== null && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelected(null)}>
@@ -189,43 +364,43 @@ const Services = () => {
           </div>
         </div>
       )}
-      {/* New section for Cold Frost services */}
-      <div className="mt-16 bg-gradient-to-br from-teal-50 to-teal-50 rounded-2xl p-8 border border-teal-100 animate-fade-in-up" style={{ animationDelay: '1000ms' }}>
-        <div className="text-center">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Services</h3>
-          <p className="text-gray-600 mb-4">Cold Frost customizes products according to client requirements and provides the following services:</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            <div className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h4 className="font-semibold text-teal-700 mb-2">Estimation</h4>
-              <p className="text-gray-600 text-sm">Accurate cost and time estimates for your projects.</p>
-            </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h4 className="font-semibold text-teal-700 mb-2">Designing</h4>
-              <p className="text-gray-600 text-sm">Custom designs tailored to your specific needs.</p>
-            </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h4 className="font-semibold text-teal-700 mb-2">Supply</h4>
-              <p className="text-gray-600 text-sm">High-quality products delivered on time.</p>
-            </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h4 className="font-semibold text-teal-700 mb-2">Installation</h4>
-              <p className="text-gray-600 text-sm">Professional installation services for seamless setup.</p>
-            </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h4 className="font-semibold text-teal-700 mb-2">Commissioning</h4>
-              <p className="text-gray-600 text-sm">Thorough testing and commissioning to ensure optimal performance.</p>
-            </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h4 className="font-semibold text-teal-700 mb-2">After Sales Services</h4>
-              <p className="text-gray-600 text-sm">Ongoing support and maintenance (terms & conditions apply).</p>
-            </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h4 className="font-semibold text-teal-700 mb-2">Best Product Performance</h4>
-              <p className="text-gray-600 text-sm">Delivered by our most skilled team.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <style>{`
+        @keyframes slide-in-right {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(0); }
+        }
+        @keyframes slide-in-left {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(0); }
+        }
+        @keyframes slide-out-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }
+        @keyframes slide-out-right {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-slide-in-right {
+          animation: slide-in-right 0.6s forwards;
+        }
+        .animate-slide-in-left {
+          animation: slide-in-left 0.6s forwards;
+        }
+        .animate-slide-out-left {
+          animation: slide-out-left 0.6s forwards;
+        }
+        .animate-slide-out-right {
+          animation: slide-out-right 0.6s forwards;
+        }
+        .animate-fade-in-up {
+          animation: fadeInUp 0.7s;
+        }
+        @keyframes fadeInUp {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </section>
   );
 };
