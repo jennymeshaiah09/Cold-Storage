@@ -252,47 +252,27 @@ const Services = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Services</h3>
             <p className="text-gray-600 mb-4">Cold Frost customizes products according to client requirements and provides the following services:</p>
             <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center mb-10 overflow-hidden">
-              {/* Sliding Cards */}
-              <div className="absolute inset-0 w-full h-full">
-                {/* Previous Card */}
-                {isSliding && (
-                  <div
-                    className={`absolute w-full h-full top-0 left-0 transition-transform duration-600 ease-in-out
-                      ${slideDirection === 'right' ? '-translate-x-0 animate-slide-out-left' : 'translate-x-0 animate-slide-out-right'}`}
-                    style={{ zIndex: 10 }}
-                  >
-                    <img
-                      src={services[prev].image}
-                      alt={services[prev].title}
-                      className="w-full h-full object-cover object-center absolute inset-0"
-                      draggable={false}
-                      style={{ filter: 'none' }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" />
-                    <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center px-6">
-                      <h3 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                        {services[prev].title}
-                      </h3>
-                      <p className="text-lg md:text-2xl text-white/90 mb-6 max-w-2xl mx-auto">
-                        {services[prev].description}
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {/* Current Card */}
+              {/* Sliding Cards: Only render prev and current */}
+              {[prev, current].map((idx, i) => (
                 <div
+                  key={idx + '-' + i + '-' + (i === 0 ? 'prev' : 'current')}
                   className={`absolute w-full h-full top-0 left-0 transition-transform duration-600 ease-in-out
-                    ${isSliding
+                    ${i === 0
                       ? slideDirection === 'right'
-                        ? 'translate-x-full animate-slide-in-right'
-                        : '-translate-x-full animate-slide-in-left'
-                      : 'translate-x-0'}
+                        ? '-translate-x-0 animate-slide-out-left'
+                        : 'translate-x-0 animate-slide-out-right'
+                      : isSliding
+                        ? slideDirection === 'right'
+                          ? 'translate-x-full animate-slide-in-right'
+                          : '-translate-x-full animate-slide-in-left'
+                        : 'translate-x-0 z-10'
+                    }
                   `}
-                  style={{ zIndex: 20 }}
+                  style={{ zIndex: i === 1 ? 20 : 10 }}
                 >
                   <img
-                    src={services[current].image}
-                    alt={services[current].title}
+                    src={services[idx].image}
+                    alt={services[idx].title}
                     className="w-full h-full object-cover object-center absolute inset-0"
                     draggable={false}
                     style={{ filter: 'none' }}
@@ -300,46 +280,14 @@ const Services = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" />
                   <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center px-6">
                     <h3 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                      {services[current].title}
+                      {services[idx].title}
                     </h3>
                     <p className="text-lg md:text-2xl text-white/90 mb-6 max-w-2xl mx-auto">
-                      {services[current].description}
+                      {services[idx].description}
                     </p>
                   </div>
                 </div>
-              </div>
-              {/* Left Arrow */}
-              <button
-                onClick={() => handleSlide('left')}
-                className="absolute left-0 top-1/2 -translate-y-1/2 bg-transparent text-teal-700 px-2 py-2 shadow-none transition-all duration-300 z-20"
-                aria-label="Previous Service"
-                disabled={isSliding}
-                style={{ borderRadius: 0, borderTopRightRadius: '0.75rem', borderBottomRightRadius: '0.75rem' }}
-              >
-                <ChevronLeft size={28} />
-              </button>
-              {/* Right Arrow */}
-              <button
-                onClick={() => handleSlide('right')}
-                className="absolute right-0 top-1/2 -translate-y-1/2 bg-transparent text-teal-700 px-2 py-2 shadow-none transition-all duration-300 z-20"
-                aria-label="Next Service"
-                disabled={isSliding}
-                style={{ borderRadius: 0, borderTopLeftRadius: '0.75rem', borderBottomLeftRadius: '0.75rem' }}
-              >
-                <ChevronRight size={28} />
-              </button>
-              {/* Dots */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-                {services.map((_, idx: number) => (
-                  <button
-                    key={idx}
-                    onClick={() => goTo(idx)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${idx === current ? 'bg-teal-400 scale-125' : 'bg-white/70 hover:bg-teal-200'}`}
-                    aria-label={`Go to service ${idx + 1}`}
-                    disabled={isSliding}
-                  />
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </div>
