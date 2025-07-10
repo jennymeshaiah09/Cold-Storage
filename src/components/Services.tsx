@@ -4,7 +4,7 @@ import { Apple, Fish, Milk, Wheat, Beef, Grape, ChevronLeft, ChevronRight } from
 const foodTypes = [
   {
     title: "Fruits & Vegetables",
-    image: "/fruitsandveg.png",
+    image: "/vegies.jpg",
     description: "Store fresh produce like apples, oranges, potatoes, onions, and leafy vegetables with optimal temperature and humidity control.",
     temp: "Recommended Temp: 0°C to 4°C (Chilled)",
     coolingType: "Chilled storage helps maintain freshness and prevent spoilage for fruits and vegetables.",
