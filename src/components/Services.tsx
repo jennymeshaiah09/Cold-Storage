@@ -252,6 +252,24 @@ const Services = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Services</h3>
             <p className="text-gray-600 mb-4">Cold Frost customizes products according to client requirements and provides the following services:</p>
             <div className="relative w-full h-[400px] md:h-[500px] min-h-[300px] flex items-center justify-center mb-10 overflow-hidden border-2 border-red-500 md:border-none">
+              {/* Left Arrow */}
+              <button
+                className="carousel-arrow carousel-arrow-left"
+                style={{ position: 'absolute', left: '24px', top: '50%', transform: 'translateY(-50%)', zIndex: 30, background: 'rgba(255,255,255,0.25)', border: 'none', borderRadius: '50%', boxShadow: '0 4px 24px rgba(0,0,0,0.12)', backdropFilter: 'blur(8px)', width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'background 0.2s' }}
+                onClick={() => handleSlide('left')}
+                aria-label="Previous Service"
+              >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              {/* Right Arrow */}
+              <button
+                className="carousel-arrow carousel-arrow-right"
+                style={{ position: 'absolute', right: '24px', top: '50%', transform: 'translateY(-50%)', zIndex: 30, background: 'rgba(255,255,255,0.25)', border: 'none', borderRadius: '50%', boxShadow: '0 4px 24px rgba(0,0,0,0.12)', backdropFilter: 'blur(8px)', width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'background 0.2s' }}
+                onClick={() => handleSlide('right')}
+                aria-label="Next Service"
+              >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
               {[prev, current].map((idx, i) => (
                 <div
                   key={idx + '-' + i + '-' + (i === 0 ? 'prev' : 'current')}
@@ -347,6 +365,26 @@ const Services = () => {
         @keyframes fadeInUp {
           0% { opacity: 0; transform: translateY(40px); }
           100% { opacity: 1; transform: translateY(0); }
+        }
+        .carousel-arrow {
+          background: rgba(255,255,255,0.25);
+          border-radius: 50%;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+          backdrop-filter: blur(8px);
+          width: 48px;
+          height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+        .carousel-arrow:hover {
+          background: rgba(255,255,255,0.45);
+          box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+        }
+        .carousel-arrow svg {
+          stroke: #222;
         }
       `}</style>
     </section>
