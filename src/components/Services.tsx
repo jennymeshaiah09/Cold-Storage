@@ -8,7 +8,7 @@ const foodTypes = [
     description: "Store fresh produce like apples, oranges, potatoes, onions, and leafy vegetables with optimal temperature and humidity control.",
     temp: "Recommended Temp: 0°C to 4°C (Chilled)",
     coolingType: "Chilled storage helps maintain freshness and prevent spoilage for fruits and vegetables.",
-    features: ["Apples, Oranges, Grapes", ", Onions, Carrots", "Leafy vegetables & herbs"]
+    features: ["Apples, Oranges, Grapes", "Onions, Carrots", "Leafy vegetables & herbs"]
   },
   {
     title: "Dairy Products",
