@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'luc
 
 const Footer = () => {
   const socialLinks = [
-    "https://www.facebook.com/profile.php?id=61578355583195",
+    "https://www.facebook.com/people/Cold-Frost/pfbid0JpwUTLk2FRJjFxp69inndsFjw9tbDME9AxDyGLBR3jkZp9EVZ5N52UTidxDnShb4l/",
     "https://www.linkedin.com/in/cold-frost-402046371/",
     "https://www.instagram.com/cold_frosthyd/"
   ];
