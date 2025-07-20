@@ -56,7 +56,7 @@ const foodTypes = [
     description: "Manages controlled ripening for produce and provides precise, refrigerated storage for temperature-sensitive pharmaceuticals.",
     temp: "Ripening: 13°C to 22°C, Pharmaceutical: 2°C to 8°C",
     coolingType: "Controls temperature, humidity, and gas for ripening; offers stable refrigerated storage for medical-grade products.",
-    features: ["Bananas", "Mangoes", "Tomatoes", "Vaccines", "Insulin", "Biologics"]
+    features: ["Bananas", "Mangoes", "Vaccines", "Insulin"]
   }
 ];
 
