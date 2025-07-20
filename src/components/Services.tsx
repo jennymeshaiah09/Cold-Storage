@@ -51,8 +51,8 @@ const foodTypes = [
     features: ["Rice & wheat", "Lentils & pulses", "Processed grain products"]
   },
   {
-    title: "Beverages & Juices",
-    image: "/beverages.cms",
+    title: "Ripening chambers &Pharmaceuticals",
+    image: "/pharma.jpg",
     description: "Store fruit juices, soft drinks, beer, and other beverages at optimal temperatures for freshness.",
     temp: "Recommended Temp: 2°C to 8°C (Chilled)",
     coolingType: "Chilled storage keeps beverages and juices fresh and ready to serve.",
